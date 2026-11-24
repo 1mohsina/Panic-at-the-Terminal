@@ -3,7 +3,7 @@ project(PanicAtTheTerminal LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-add_executable(PanicAtTheTerminal
-        code/src/main.cpp
+add_executable(test_maze
+        code/src/test_maze.cpp
+        code/src/maze.cpp
 )
