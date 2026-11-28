@@ -1,15 +1,16 @@
-//
-// Created by nusra on 11/24/2026.
-//
+#ifndef MAZE_H
+#define MAZE_H
 
-#ifndef PANIC_AT_THE_TERMINAL_MAZE_H
-#define PANIC_AT_THE_TERMINAL_MAZE_H
-
-const int MAZE_ROWS = 19;
+const int MAZE_ROWS = 31;
 const int MAZE_COLS = 35;
 const int ROOM_COUNT = 9;
 
-const int ROOM_LOCKED =0, ROOM_UNLOCKED =1, ROOM_COMPLETED = 2;
+const int BOX_H =7;
+const int BOX_W =11;
+
+const int ROOM_LOCKED =0;
+const int ROOM_UNLOCKED =1;
+const int ROOM_COMPLETED =2;
 
 const int MOVE_BLOCKED =0;
 const int MOVE_OK =1;
@@ -20,22 +21,29 @@ class maze{
     public:
             maze();
             void generate();
-            int move(char key);
-            void draw() const;
+
+            bool isWall(int y, int x) const;
             int roomAt(int y, int x) const;
+            void render (int playerY=-1,int playerX=-1) const;
+            int getStartY() const;
+            int getStartX() const;
             int getRoomState(int id) const;
             void setRoomState(int id,int state);
-            int getSteps() const;
-            int getPlayerY() const;
-            int getPlayerX() const;
+
 
     private:
            char grid[MAZE_ROWS][MAZE_COLS];
-           int roomY[ROOM_COUNT], roomX[ROOM_COUNT], roomState[ROOM_COUNT];
-           int playerY, playerX, steps;
+           int cellRoom[MAZE_ROWS][MAZE_COLS];
+
+           int roomTop[ROOM_COUNT];
+           int roomLeft[ROOM_COUNT];
+           int roomY[ROOM_COUNT];
+           int roomX[ROOM_COUNT];
+           int roomState[ROOM_COUNT];
+
            void carve(int y, int x);
-           bool placeRooms();
+           void placeRooms();
 };
 
 
-#endif //PANIC_AT_THE_TERMINAL_MAZE_H
+#endif
